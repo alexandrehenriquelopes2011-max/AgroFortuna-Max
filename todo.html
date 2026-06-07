@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/todo.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-tasks"></i> TaskMaster</h1>
+                <p>Organize suas tarefas e seja mais produtivo</p>
+            </div>
+            <div class="header-buttons">
+                <button id="darkModeBtn" class="theme-btn" title="Alternar modo escuro">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="settingsBtn" class="settings-btn" title="Configurações">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar with Categories -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h3>Categorias</h3>
+                    <button id="addCategoryBtn" class="add-btn" title="Adicionar categoria">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div id="categoriesList" class="categories-list">
+                    <!-- Categories will be added here -->
+                </div>
+            </aside>
+
+            <!-- Tasks Section -->
+            <section class="tasks-section">
+                <!-- Task Input -->
+                <div class="task-input-container">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="taskInput" 
+                            class="task-input" 
+                            placeholder="Adicione uma nova tarefa..."
+                            autocomplete="off"
+                        >
+                        <select id="categorySelect" class="category-select">
+                            <!-- Options will be populated by JS -->
+                        </select>
+                        <select id="prioritySelect" class="priority-select">
+                            <option value="low">Baixa</option>
+                            <option value="medium" selected>Média</option>
+                            <option value="high">Alta</option>
+                        </select>
+                        <button id="addTaskBtn" class="add-task-btn">
+                            <i class="fas fa-plus"></i> Adicionar
+                        </button>
+                    </div>
+                    <div class="filter-container">
+                        <button id="filterAllBtn" class="filter-btn active" data-filter="all">
+                            Todas <span class="count">0</span>
+                        </button>
+                        <button id="filterActiveBtn" class="filter-btn" data-filter="active">
+                            Ativas <span class="count">0</span>
+                        </button>
+                        <button id="filterCompleteBtn" class="filter-btn" data-filter="completed">
+                            Concluídas <span class="count">0</span>
+                        </button>
+                        <button id="sortBtn" class="sort-btn" title="Ordenar tarefas">
+                            <i class="fas fa-sort"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tasks List -->
+                <div id="tasksList" class="tasks-list">
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>Nenhuma tarefa ainda</p>
+                        <small>Adicione uma tarefa para começar!</small>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="statistics">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-list-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-label">Total de Tarefas</p>
+                            <p class="stat-value" id="totalTasks">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon completed">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-label">Concluídas</p>
+                            <p class="stat-value" id="completedTasks">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-label">Pendentes</p>
+                            <p class="stat-value" id="pendingTasks">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon progress">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-label">Progresso</p>
+                            <p class="stat-value" id="progressPercent">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Sort Modal -->
+        <div id="sortModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Ordenar Tarefas</h3>
+                    <button class="close-btn" onclick="closeSortModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <button class="sort-option" onclick="sortTasks('date-desc')">
+                        <i class="fas fa-arrow-down"></i> Mais Recentes
+                    </button>
+                    <button class="sort-option" onclick="sortTasks('date-asc')">
+                        <i class="fas fa-arrow-up"></i> Mais Antigas
+                    </button>
+                    <button class="sort-option" onclick="sortTasks('priority-high')">
+                        <i class="fas fa-sort-amount-down"></i> Prioridade Alta
+                    </button>
+                    <button class="sort-option" onclick="sortTasks('priority-low')">
+                        <i class="fas fa-sort-amount-up"></i> Prioridade Baixa
+                    </button>
+                    <button class="sort-option" onclick="sortTasks('name-asc')">
+                        <i class="fas fa-arrow-a-z"></i> Nome (A-Z)
+                    </button>
+                    <button class="sort-option" onclick="sortTasks('name-desc')">
+                        <i class="fas fa-arrow-z-a"></i> Nome (Z-A)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Configurações</h3>
+                    <button class="close-btn" onclick="closeSettingsModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="settings-group">
+                        <label>
+                            <input type="checkbox" id="notificationsToggle" checked>
+                            <span>Ativar notificações de tarefas</span>
+                        </label>
+                    </div>
+                    <div class="settings-group">
+                        <label>
+                            <input type="checkbox" id="soundToggle" checked>
+                            <span>Som ao adicionar tarefa</span>
+                        </label>
+                    </div>
+                    <div class="settings-group">
+                        <label>
+                            <input type="checkbox" id="autoDeleteToggle">
+                            <span>Auto-deletar tarefas concluídas após 7 dias</span>
+                        </label>
+                    </div>
+                    <hr style="margin: 20px 0;">
+                    <button class="danger-btn" onclick="clearAllTasks()">
+                        <i class="fas fa-trash"></i> Limpar Todas as Tarefas
+                    </button>
+                    <button class="danger-btn" onclick="exportData()">
+                        <i class="fas fa-download"></i> Exportar Dados
+                    </button>
+                    <button class="danger-btn" onclick="importData()">
+                        <i class="fas fa-upload"></i> Importar Dados
+                    </button>
+                    <input type="file" id="importFile" style="display: none;" accept=".json">
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Category Modal -->
+        <div id="addCategoryModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Adicionar Categoria</h3>
+                    <button class="close-btn" onclick="closeAddCategoryModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input 
+                        type="text" 
+                        id="categoryInput" 
+                        class="modal-input" 
+                        placeholder="Nome da categoria"
+                        autocomplete="off"
+                    >
+                    <div class="color-picker">
+                        <label>Cor da categoria:</label>
+                        <div class="color-options">
+                            <button class="color-btn" style="background-color: #FF6B6B;" onclick="selectColor('#FF6B6B')"></button>
+                            <button class="color-btn" style="background-color: #4ECDC4;" onclick="selectColor('#4ECDC4')"></button>
+                            <button class="color-btn" style="background-color: #45B7D1;" onclick="selectColor('#45B7D1')"></button>
+                            <button class="color-btn" style="background-color: #FFA07A;" onclick="selectColor('#FFA07A')"></button>
+                            <button class="color-btn" style="background-color: #98D8C8;" onclick="selectColor('#98D8C8')"></button>
+                            <button class="color-btn" style="background-color: #F7DC6F;" onclick="selectColor('#F7DC6F')"></button>
+                        </div>
+                    </div>
+                    <button class="confirm-btn" onclick="confirmAddCategory()">
+                        <i class="fas fa-check"></i> Adicionar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="assets/js/todo-app.js"></script>
+</body>
+</html>
