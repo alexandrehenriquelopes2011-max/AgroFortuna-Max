@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroFortuna - Cultivando o Futuro</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Botão de Acessibilidade -->
+    <div class="accessibility-container">
+        <button id="accessibilityBtn" class="accessibility-btn" title="Ativar leitor de texto">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="darkModeBtn" class="dark-mode-btn" title="Alternar modo escuro">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Folhas Caindo -->
+    <div id="leaves-container" class="leaves-container"></div>
+
+    <!-- Header/Navbar -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="assets/images/logo.svg" alt="AgroFortuna Logo" class="logo-img">
+                    <span class="logo-text">AgroFortuna</span>
+                </div>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#itambaraca" class="nav-link">Itambaracá</a></li>
+                    <li><a href="#infograficos" class="nav-link">Infográficos</a></li>
+                    <li><a href="#vozes" class="nav-link">Vozes da Comunidade</a></li>
+                    <li><a href="#quiz" class="nav-link">Quiz</a></li>
+                    <li><a href="#podcasts" class="nav-link">Podcasts</a></li>
+                    <li><a href="#galeria" class="nav-link">Galeria</a></li>
+                    <li><a href="#inovacoes" class="nav-link">Inovações</a></li>
+                    <li><a href="#minigame" class="nav-link">Minigame</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Home Section com Efeitos -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <canvas id="particleCanvas"></canvas>
+            <div class="trees-background"></div>
+            <div class="river-background"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">AgroFortuna</h1>
+                <p class="hero-subtitle">Cultivando o Futuro Sustentável</p>
+                <p class="hero-description">Descobrindo a harmonia entre tecnologia, agricultura e meio ambiente</p>
+                <button class="cta-button" onclick="document.getElementById('infograficos').scrollIntoView({behavior: 'smooth'})">
+                    Explore Mais
+                </button>
+            </div>
+            <div class="hero-plant">
+                <img src="assets/images/plant.svg" alt="Planta" class="plant-image">
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Deslize para explorar</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Itambaracá Section -->
+    <section id="itambaraca" class="itambaraca-section">
+        <div class="container">
+            <h2 class="section-title">Itambaracá - Nossa Terra, Nosso Compromisso</h2>
+            <div class="itambaraca-content">
+                <div class="itambaraca-text">
+                    <h3>Conhecendo a Região</h3>
+                    <p>Itambaracá, localizada no estado do Paraná, é uma região rica em biodiversidade e potencial agrícola. Com uma população dedicada à sustentabilidade, a cidade se destaca como um exemplo de compromisso com o meio ambiente.</p>
+                    <div class="itambaraca-stats">
+                        <div class="stat-card">
+                            <h4>Altitude</h4>
+                            <p>562m</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Temperatura Média</h4>
+                            <p>21°C</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Precipitação Anual</h4>
+                            <p>1.600mm</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="itambaraca-map">
+                    <img src="assets/images/map-itambaraca.svg" alt="Mapa de Itambaracá">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infográficos Section -->
+    <section id="infograficos" class="infograficos-section">
+        <div class="container">
+            <h2 class="section-title">Infográficos - Dados de Sustentabilidade</h2>
+            
+            <div class="infograficos-grid">
+                <!-- Gráfico 1: Crescimento de Florestas -->
+                <div class="infografico-card">
+                    <h3>Crescimento de Florestas (30 Anos)</h3>
+                    <div class="chart-container">
+                        <canvas id="forestChart"></canvas>
+                    </div>
+                    <p class="chart-description">Evolução da cobertura florestal em Itambaracá e região</p>
+                </div>
+
+                <!-- Gráfico 2: Produção Agrícola -->
+                <div class="infografico-card">
+                    <h3>Produção Agrícola Sustentável</h3>
+                    <div class="chart-container">
+                        <canvas id="agricultureChart"></canvas>
+                    </div>
+                    <p class="chart-description">Crescimento da produção com tecnologia sustentável</p>
+                </div>
+
+                <!-- Gráfico 3: Reflorestamento -->
+                <div class="infografico-card">
+                    <h3>Hectares Reflorestados</h3>
+                    <div class="chart-container">
+                        <canvas id="reforestChart"></canvas>
+                    </div>
+                    <p class="chart-description">Evolução do reflorestamento no Paraná</p>
+                </div>
+
+                <!-- Gráfico 4: Piscicultura Sustentável -->
+                <div class="infografico-card">
+                    <h3>Produção de Piscicultura</h3>
+                    <div class="chart-container">
+                        <canvas id="fisheryChart"></canvas>
+                    </div>
+                    <p class="chart-description">Crescimento sustentável da piscicultura regional</p>
+                </div>
+            </div>
+
+            <!-- Contadores Animados -->
+            <div class="metrics-container">
+                <div class="metric-box">
+                    <div class="metric-number" data-target="45000">0</div>
+                    <p>Hectares Reflorestados</p>
+                    <small>Paraná</small>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-number" data-target="156">0</div>
+                    <p>Espécies Protegidas</p>
+                    <small>Região</small>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-number" data-target="2800000">0</div>
+                    <p>Toneladas de Alimentos/Ano</p>
+                    <small>Tecnologia Sustentável</small>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-number" data-target="85000">0</div>
+                    <p>Toneladas de Peixe/Ano</p>
+                    <small>Brasil (Sustentável)</small>
+                </div>
+            </div>
+
+            <!-- Comparação Regional -->
+            <div class="regional-comparison">
+                <h3>Comparação Regional - Dados de Sustentabilidade</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-city">
+                        <h4>Itambaracá</h4>
+                        <ul>
+                            <li>Cobertura Florestal: 42%</li>
+                            <li>Produção Agrícola: 125.000 ton/ano</li>
+                            <li>Reflorestamento: 8.500 ha/ano</li>
+                            <li>Piscicultura: 12.000 ton/ano</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-city">
+                        <h4>Banderantes</h4>
+                        <ul>
+                            <li>Cobertura Florestal: 38%</li>
+                            <li>Produção Agrícola: 156.000 ton/ano</li>
+                            <li>Reflorestamento: 6.200 ha/ano</li>
+                            <li>Piscicultura: 8.500 ton/ano</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-city">
+                        <h4>Londrina</h4>
+                        <ul>
+                            <li>Cobertura Florestal: 35%</li>
+                            <li>Produção Agrícola: 425.000 ton/ano</li>
+                            <li>Reflorestamento: 9.800 ha/ano</li>
+                            <li>Piscicultura: 15.600 ton/ano</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-city">
+                        <h4>Curitiba</h4>
+                        <ul>
+                            <li>Cobertura Florestal: 52%</li>
+                            <li>Produção Agrícola: 89.000 ton/ano</li>
+                            <li>Reflorestamento: 2.100 ha/ano</li>
+                            <li>Piscicultura: 3.200 ton/ano</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vozes da Comunidade Section -->
+    <section id="vozes" class="vozes-section">
+        <div class="container">
+            <h2 class="section-title">Vozes da Comunidade</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-image">
+                        <img src="assets/images/person1.jpg" alt="João Silva">
+                    </div>
+                    <h4>João Silva</h4>
+                    <p class="role">Agricultor Sustentável</p>
+                    <p class="testimonial-text">"A tecnologia sustentável transformou minha produção. Agora consigo plantar mais com menos impacto ambiental."</p>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-image">
+                        <img src="assets/images/person2.jpg" alt="Maria Santos">
+                    </div>
+                    <h4>Maria Santos</h4>
+                    <p class="role">Educadora Ambiental</p>
+                    <p class="testimonial-text">"Iniciativas como a AgroFortuna inspiram nossas crianças a cuidar do planeta e buscar soluções inovadoras."</p>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-image">
+                        <img src="assets/images/person3.jpg" alt="Carlos Oliveira">
+                    </div>
+                    <h4>Carlos Oliveira</h4>
+                    <p class="role">Produtor de Piscicultura</p>
+                    <p class="testimonial-text">"A piscicultura sustentável não é só negócio, é preservação. Estou orgulhoso de contribuir com o futuro."</p>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <h2 class="section-title">Quiz de Sustentabilidade</h2>
+            <div class="quiz-container">
+                <div id="quiz-content" class="quiz-content">
+                    <!-- Quiz será gerado por JavaScript -->
+                </div>
+                <div id="quiz-result" class="quiz-result hidden">
+                    <h3>Resultado do Quiz</h3>
+                    <p>Você acertou <span id="quiz-score">0</span> de 10 perguntas!</p>
+                    <p id="quiz-feedback"></p>
+                    <button onclick="resetQuiz()" class="cta-button">Fazer Novamente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Podcasts Section -->
+    <section id="podcasts" class="podcasts-section">
+        <div class="container">
+            <h2 class="section-title">Podcasts - Ouça Histórias de Sustentabilidade</h2>
+            <div class="podcasts-grid">
+                <div class="podcast-card">
+                    <div class="podcast-image">
+                        <img src="assets/images/podcast1.jpg" alt="Podcast 1">
+                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                    </div>
+                    <h4>Agricultura Sustentável no Paraná</h4>
+                    <p class="podcast-date">Episódio 1 - 25 min</p>
+                    <p class="podcast-description">Conheça as práticas sustentáveis que estão transformando a agricultura paranaense.</p>
+                </div>
+                <div class="podcast-card">
+                    <div class="podcast-image">
+                        <img src="assets/images/podcast2.jpg" alt="Podcast 2">
+                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                    </div>
+                    <h4>Piscicultura: Alimento e Preservação</h4>
+                    <p class="podcast-date">Episódio 2 - 30 min</p>
+                    <p class="podcast-description">Descubra como a piscicultura sustentável alimenta comunidades e protege rios.</p>
+                </div>
+                <div class="podcast-card">
+                    <div class="podcast-image">
+                        <img src="assets/images/podcast3.jpg" alt="Podcast 3">
+                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                    </div>
+                    <h4>Tecnologia Agro e Futuro Verde</h4>
+                    <p class="podcast-date">Episódio 3 - 28 min</p>
+                    <p class="podcast-description">Especialistas discutem como a inovação tecnológica pode salvar nossos ecossistemas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Section -->
+    <section id="galeria" class="galeria-section">
+        <div class="container">
+            <h2 class="section-title">Galeria de Sustentabilidade</h2>
+            <div class="galeria-grid">
+                <div class="galeria-item">
+                    <img src="assets/images/galeria1.jpg" alt="Plantação sustentável">
+                    <div class="galeria-overlay">
+                        <h4>Plantação Sustentável</h4>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <img src="assets/images/galeria2.jpg" alt="Reflorestamento">
+                    <div class="galeria-overlay">
+                        <h4>Reflorestamento Urbano</h4>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <img src="assets/images/galeria3.jpg" alt="Piscicultura">
+                    <div class="galeria-overlay">
+                        <h4>Piscicultura Sustentável</h4>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <img src="assets/images/galeria4.jpg" alt="Tecnologia Agro">
+                    <div class="galeria-overlay">
+                        <h4>Tecnologia Agro Inovadora</h4>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <img src="assets/images/galeria5.jpg" alt="Comunidade">
+                    <div class="galeria-overlay">
+                        <h4>Comunidade em Ação</h4>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <img src="assets/images/galeria6.jpg" alt="Biodiversidade">
+                    <div class="galeria-overlay">
+                        <h4>Biodiversidade Protegida</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inovações Tecnológicas Section -->
+    <section id="inovacoes" class="inovacoes-section">
+        <div class="container">
+            <h2 class="section-title">Inovações Tecnológicas na Agropecuária</h2>
+            <div class="inovacoes-grid">
+                <div class="inovacao-card">
+                    <div class="inovacao-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>Sensores IoT</h3>
+                    <p>Monitoramento em tempo real de solo, umidade e nutrientes para otimizar plantações.</p>
+                    <button class="learn-more-btn">Saiba Mais</button>
+                </div>
+                <div class="inovacao-card">
+                    <div class="inovacao-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Agricultura de Precisão</h3>
+                    <p>Tecnologia GPS e drones para aplicação precisa de insumos e redução de desperdício.</p>
+                    <button class="learn-more-btn">Saiba Mais</button>
+                </div>
+                <div class="inovacao-card">
+                    <div class="inovacao-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>Sistemas de Irrigação Inteligente</h3>
+                    <p>Irrigação automatizada que economiza água e mantém a saúde das plantas.</p>
+                    <button class="learn-more-btn">Saiba Mais</button>
+                </div>
+                <div class="inovacao-card">
+                    <div class="inovacao-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3>Piscicultura Sustentável</h3>
+                    <p>Sistemas fechados que minimizam impacto ambiental e maximizam produção.</p>
+                    <button class="learn-more-btn">Saiba Mais</button>
+                </div>
+                <div class="inovacao-card">
+                    <div class="inovacao-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Robótica Agrícola</h3>
+                    <p>Máquinas autônomas para plantio, colheita e análise de plantas.</p>
+                    <button class="learn-more-btn">Saiba Mais</button>
+                </div>
+                <div class="inovacao-card">
+                    <div class="inovacao-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Inteligência Artificial</h3>
+                    <p>IA para previsão de colheita, detecção de doenças e otimização de recursos.</p>
+                    <button class="learn-more-btn">Saiba Mais</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Minigame Section -->
+    <section id="minigame" class="minigame-section">
+        <div class="container">
+            <h2 class="section-title">Minigame Ambiental - Gestor de Sustentabilidade</h2>
+            <div class="minigame-container">
+                <div class="game-board">
+                    <div class="game-info">
+                        <div class="game-stat">
+                            <label>Saúde do Ecossistema:</label>
+                            <div class="stat-bar">
+                                <div id="ecosystem-health" class="stat-fill" style="width: 100%"></div>
+                            </div>
+                            <span id="ecosystem-percent">100%</span>
+                        </div>
+                        <div class="game-stat">
+                            <label>Produção Agrícola:</label>
+                            <div class="stat-bar">
+                                <div id="farm-production" class="stat-fill" style="width: 50%"></div>
+                            </div>
+                            <span id="production-percent">50%</span>
+                        </div>
+                        <div class="game-stat">
+                            <label>Pontuação:</label>
+                            <span id="game-score">0</span>
+                        </div>
+                    </div>
+
+                    <div id="game-questions" class="game-questions">
+                        <!-- Perguntas serão geradas por JavaScript -->
+                    </div>
+
+                    <div id="game-result" class="game-result hidden">
+                        <h3>Resultado Final</h3>
+                        <p>Pontuação: <span id="final-score">0</span> pontos</p>
+                        <p id="final-feedback"></p>
+                        <button onclick="resetMinigame()" class="cta-button">Jogar Novamente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato" class="contato-section">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contato-content">
+                <div class="contato-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Idade</label>
+                            <input type="number" id="age" name="age" min="1" max="120">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Enviar Mensagem</button>
+                    </form>
+                    <div id="form-feedback" class="hidden"></div>
+                </div>
+                <div class="contato-info">
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Localização</h4>
+                        <p>Itambaracá, PR, Brasil</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>E-mail</h4>
+                        <p><a href="mailto:alexandre.henrique.lopes@escola.pr.gov.br">alexandre.henrique.lopes@escola.pr.gov.br</a></p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <h4>Telefone</h4>
+                        <p><a href="tel:+554398283507">+55 (43) 98828-3507</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Créditos e Criadores -->
+    <section id="creditos" class="creditos-section">
+        <div class="container">
+            <h2 class="section-title">Créditos e Referências</h2>
+            
+            <div class="creditos-grid">
+                <div class="credito-card">
+                    <img src="assets/images/alexandre.jpg" alt="Alexandre Henrique Lopes">
+                    <h3>Estudante</h3>
+                    <p><strong>Nome:</strong> Alexandre Henrique Lopes</p>
+                    <p><strong>Turma:</strong> 1ºA</p>
+                    <p><strong>Colégio:</strong> Colégio Estadual Marcílio Dias</p>
+                    <p><strong>Telefone:</strong> +55 (43) 98828-3507</p>
+                    <p><strong>E-mail:</strong> <a href="mailto:alexandre.henrique.lopes@escola.pr.gov.br">alexandre.henrique.lopes@escola.pr.gov.br</a></p>
+                </div>
+                <div class="credito-card">
+                    <img src="assets/images/guilherme.jpg" alt="Guilherme Cordeiro">
+                    <h3>Professor Orientador</h3>
+                    <p><strong>Nome:</strong> Guilherme Cordeiro</p>
+                    <p><strong>Função:</strong> Orientador de Projetos</p>
+                    <p><strong>Instituição:</strong> Colégio Estadual Marcílio Dias</p>
+                    <p><strong>E-mail:</strong> <a href="mailto:gulherme.cordeiro.santos19@escola.pr.gov.br">gulherme.cordeiro.santos19@escola.pr.gov.br</a></p>
+                </div>
+            </div>
+
+            <div class="referencias">
+                <h3>Referências e Fontes</h3>
+                <ul>
+                    <li><a href="#" target="_blank">IBGE - Instituto Brasileiro de Geografia e Estatística</a></li>
+                    <li><a href="#" target="_blank">EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária</a></li>
+                    <li><a href="#" target="_blank">SEAB/PR - Secretaria de Estado da Agricultura e do Abastecimento do Paraná</a></li>
+                    <li><a href="#" target="_blank">FAO - Organização das Nações Unidas para Alimentação e Agricultura</a></li>
+                    <li><a href="#" target="_blank">WWF Brasil - Fundo Mundial para a Natureza</a></li>
+                    <li><a href="#" target="_blank">The Nature Conservancy Brasil</a></li>
+                    <li><a href="#" target="_blank">Prefeitura de Itambaracá</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AgroFortuna</h4>
+                    <p>Cultivando o Futuro Sustentável através de inovação, educação e compromisso ambiental.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#infograficos">Infográficos</a></li>
+                        <li><a href="#inovacoes">Inovações</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AgroFortuna. Todos os direitos reservados. Desenvolvido com <i class="fas fa-heart"></i> por Alexandre Henrique Lopes</p>
+                <a href="#creditos" class="creditos-link">Créditos e Referências</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/leaves.js"></script>
+    <script src="assets/js/quiz.js"></script>
+    <script src="assets/js/minigame.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script src="assets/js/accessibility.js"></script>
+</body>
+</html>
